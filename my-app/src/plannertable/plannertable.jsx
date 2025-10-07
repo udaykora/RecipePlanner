@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useUpdateDayMeals } from "../tanqueryapi/tanquermutation";
 import { useDispatch, useSelector } from "react-redux";
-import { removeMeal } from "../slices/recipePlanner";
+import { removeMeal ,addMeal } from "../slices/recipePlanner";
 import { Link } from "react-router-dom";
+import { updateDayMeals  , updateDayMealsMultiple} from "../firebase/firebasedata"; 
+
 
 const PlannerData = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,6 @@ const PlannerData = () => {
   const data = useSelector((state) => state.plannerSlice);
   const loginEmail = useSelector((state) => state.logindata.email);
 
-  const updateDayMealsMutation = useUpdateDayMeals();
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   const plannerData = data || [];
 
@@ -18,7 +18,9 @@ const PlannerData = () => {
     if (!plannerData[dayIndex]) return;
     const updatedMeals = plannerData[dayIndex].filter((_, index) => index !== mealIndex);
     dispatch(removeMeal({ dayIndex, updatedMeals }));
-    updateDayMealsMutation.mutate({ dayIndex, meals: updatedMeals, email: loginEmail });
+    updateDayMeals(dayIndex,updatedMeals,loginEmail)
+    
+   
   };
 
   return (

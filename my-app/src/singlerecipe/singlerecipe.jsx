@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useUpdateDayMeals, useUpdateDayMealsMultiple } from "../tanqueryapi/tanquermutation";
+
 import { useNavigate } from "react-router-dom";
 import { addMeal } from "../slices/recipePlanner";
+import { updateDayMeals  , updateDayMealsMultiple} from "../firebase/firebasedata"; 
+
 
 const RecipeCard = () => {
-  const updateDayMealsMutation = useUpdateDayMeals();
   const dispatch = useDispatch()
 
-  const multipledataArray = useUpdateDayMealsMultiple();
 
   const data = useSelector((state) => state.addrecipe);
   const plannerData = useSelector((state) => state.plannerSlice);
@@ -79,7 +79,7 @@ const RecipeCard = () => {
 
   const datasend = () => {
     console.log(completedatameal)
-    multipledataArray.mutate({completedatameal,email:loginEmail});
+    updateDayMealsMultiple(completedatameal,loginEmail); 
     dispatch(addMeal(completedatameal))
 
     setSelectedDays([]);

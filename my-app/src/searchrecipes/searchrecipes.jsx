@@ -22,14 +22,14 @@ const SearchRecipe = () => {
   }, [data, featuredRecipes]);
 
   const displayData = useMemo(() => {
-    if (data  && data.length > 0) {
+    if (data && data.length > 0) {
       return data;
     }
-    if (featuredRecipes) {
-      return featuredRecipes;
-    }
-    return [];
+    return featuredRecipes || [];
   }, [data, featuredRecipes]);
+
+
+  const featuredRecipesTitle = displayData === featuredRecipes;
 
   const sendData = (recipe) => {
     navigate(`/recipecard/${recipe.id}`);
@@ -38,6 +38,12 @@ const SearchRecipe = () => {
 
   return (
     <div className="min-h-screen p-6">
+      {featuredRecipesTitle && (
+        <h1 className="text-3xl font-bold mb-6 text-center text-gray-600">
+          Featured Recipes
+        </h1>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {displayData.length > 0 ? (
           displayData.map((recipe, index) => (
@@ -70,6 +76,7 @@ const SearchRecipe = () => {
           ))
         ) : (
             <>
+            <p>Loading.....</p>
             </>
         )}
       </div>

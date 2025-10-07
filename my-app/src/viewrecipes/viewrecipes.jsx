@@ -7,7 +7,7 @@ import { addrecipe } from "../slices/singlerecipe";
 const ViewRecipe = () => {
   const [filterdata, setFilterData] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-  Types = ["All","Non-Veg","Veg"]
+  const Types = ["All","Non-Veg","Veg"]
   const itemsperpage = 6;
   const dispatch = useDispatch();
   const navigate = useNavigate();

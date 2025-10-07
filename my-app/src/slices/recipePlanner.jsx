@@ -1,5 +1,4 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-import { useUpdateDayMeals } from "../tanqueryapi/tanquermutation";
 
 let plannerSlice = createSlice({
   name: "plannerTable",
