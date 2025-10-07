@@ -8,26 +8,25 @@ const Login = () => {
  const location = useLocation();
  const loginStatus  =useSelector((state)=>state.logindata.status)
  console.log(loginStatus)
+
  const from = location.state?.from?.pathname || "/";
 
 
- useEffect(() => {
-  document.body.classList.add("theme-orange");
  
-}, []);
 
 
   let login =useLoginMutation()
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
+
   const [userMessage, setUserMessage] = useState("");
   const [assign, setAssign] = useState(false);
+
   const [temp, setTemp] = useState(false);
 
-   useEffect(()=>{
-        
-    },[loginStatus])
+  
 
 
   const handleSubmit = async (e) => {
@@ -41,7 +40,7 @@ const Login = () => {
    
     
     setTimeout(() => {
-      if (loginStatus==false) {
+      if (loginStatus==null || loginStatus == false) {
         setUserMessage("Invalid credentials. Try again.");
         setAssign(true);
         setTemp(false);
@@ -54,7 +53,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen mb-2  ">
+    <div className="flex items-center justify-center min-h-screen   ">
       <div className="w-full max-w-md  shadow-lg rounded-2xl p-8 bg-[#fafafa]">
        
 
